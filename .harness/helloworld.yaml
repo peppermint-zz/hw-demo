@@ -1,0 +1,46 @@
+pipeline:
+  name: hello-world
+  identifier: helloworld
+  projectIdentifier: demoproject
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: mygithubtoken
+        repoName: hw-demo
+        build: <+input>
+  stages:
+    - stage:
+        name: build
+        identifier: build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: GitClone
+                  name: Fetch Code
+                  identifier: Fetch_Code
+                  spec:
+                    connectorRef: mygithubtoken
+                    repoName: hw-demo
+                    build:
+                      type: branch
+                      spec:
+                        branch: main
+              - step:
+                  type: Run
+                  name: Hello-World
+                  identifier: HelloWorld
+                  spec:
+                    shell: Sh
+                    command: echo "Hello, there"
