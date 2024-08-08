@@ -1,0 +1,14 @@
+inputSet:
+  name: demo-github-input-set
+  identifier: demogithubinputset
+  orgIdentifier: default
+  projectIdentifier: demoproject
+  pipeline:
+    identifier: helloworld
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
